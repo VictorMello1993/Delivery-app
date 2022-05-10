@@ -1,4 +1,5 @@
 import {Router} from 'express';
+import { ensureClientAuthenticated } from './middlewares/ensureClientAuthenticated';
 import { AuthenticateClientController } from './modules/accounts/authClient/AuthenticateClientController';
 import { AuthenticateDeliverymanController } from './modules/accounts/authDeliveryman/AuthenticateDeliverymanController';
 import { CreateClientController } from './modules/clients/useCases/createClient/CreateClientController';
@@ -18,6 +19,6 @@ routes.post('/clients/login', authenticateClientController.handle)
 routes.post('/deliverymen/login', authenticateDeliverymanController.handle)
 routes.post('/clients', createClientController.handle)
 routes.post('/deliverymen', createDeliverymanController.handle)
-routes.post('/deliveries',  createDeliveryController.handle)
+routes.post('/deliveries', ensureClientAuthenticated, createDeliveryController.handle)
 
 export {routes}
