@@ -8,7 +8,7 @@ export class UpdateDeliveryToAddDeliverymanController {
 
    const updateDeliveryToAddDeliverymanUseCase = new UpdateDeliveryToAddDeliverymanUseCase()
 
-   const result = updateDeliveryToAddDeliverymanUseCase.execute({id_delivery: id, id_deliveryman})
+   const result = await updateDeliveryToAddDeliverymanUseCase.execute({id_delivery: id, id_deliveryman})
 
    return res.status(201).json(result)
  }
