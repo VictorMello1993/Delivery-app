@@ -10,6 +10,7 @@ export class CreateDeliverymanUseCase {
   async execute({username, password} : ICreateDeliveryman) {
     const deliveryman = await prisma.deliveryman.findFirst({where: {
       username: {
+        contains: username,
         mode: "insensitive" //Ignorando os valores em caixa alta ou caixa baixa
       }
     } })

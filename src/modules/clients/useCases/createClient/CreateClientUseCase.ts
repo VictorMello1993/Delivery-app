@@ -10,9 +10,12 @@ export class CreateClientUseCase {
   async execute({username, password} : ICreateClient) {
     const client = await prisma.clients.findFirst({where: {
       username: {
-        mode: "insensitive" //Ignorando os valores em caixa alta ou caixa baixa
+        contains: username,
+        mode: "insensitive" //Ignorando os valores em caixa alta ou caixa baixa        
       }
     } })
+
+    console.log(client)
 
     if(client){
       throw new Error("Client already exists!")

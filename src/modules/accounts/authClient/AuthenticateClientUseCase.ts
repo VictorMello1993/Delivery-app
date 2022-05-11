@@ -26,7 +26,7 @@ export class AuthenticateClientUseCase{
       throw new Error('Username or password invalid')
     }    
 
-    const token = sign({username}, process.env.SECRET_KEY as string, {
+    const token = sign({username}, process.env.SECRET_KEY_CLIENT as string, {
       subject: client.id,
       expiresIn: "1d"
     })

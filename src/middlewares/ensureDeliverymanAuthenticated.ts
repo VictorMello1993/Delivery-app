@@ -5,10 +5,10 @@ interface IPayload {
   sub: string;
 }
 
-export function ensureClientAuthenticated(req: Request, res: Response, next: NextFunction){
+export function ensureDeliverymanAuthenticated(req: Request, res: Response, next: NextFunction){
   const authHeader = req.headers.authorization
 
-  //Verificar se o cliente possui token
+  //Verificar se o entregador possui token
   if(!authHeader){
     return res.status(401).json({
       message: 'Token missing'
@@ -19,10 +19,10 @@ export function ensureClientAuthenticated(req: Request, res: Response, next: Nex
   const [, token] = authHeader.split(' ') //Bearer Token
   
   try {
-    const {sub} = verify(token, process.env.SECRET_KEY_CLIENT as string) as IPayload
+    const {sub} = verify(token, process.env.SECRET_KEY_DELIVERYMAN as string) as IPayload
 
-    //Sobrescrevendo a tipagem do Express para adicionar a propriedade id_client e atribuí-lo ao request
-    req.id_client = sub 
+    //Sobrescrevendo a tipagem do Express para adicionar a propriedade id_deliveryman e atribuí-lo ao request
+    req.id_deliveryman = sub 
 
     return next()
   } 
