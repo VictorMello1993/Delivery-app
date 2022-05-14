@@ -1,0 +1,33 @@
+version: "3.9"
+services:
+# Container do banco de dados
+  db:
+    image: postgres:13 
+    container_name: delivery_db
+    hostname: localhost
+    restart: always
+    ports: 
+      - 5433:5432
+    environment:
+      - POSTGRES_USER=victor93
+      - POSTGRES_PASSWORD=ignite
+      - POSTGRES_DB=dev
+    volumes:
+      - pgdata:/data/postgres
+
+# Container da aplicação
+  app:
+    build: .      
+    container_name: delivery_app    
+    restart: always
+    ports:
+      - 3000:3000
+    volumes:    
+      - .:/usr/app    
+    links:
+      - db
+    depends_on:
+      - db
+volumes:
+  pgdata:
+    driver: local 

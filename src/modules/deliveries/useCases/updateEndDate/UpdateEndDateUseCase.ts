@@ -16,7 +16,7 @@ export class UpdateEndDateUseCase {
         end_at: new Date()
       }
     })
-
+    
     return deliveries
   }
 }
