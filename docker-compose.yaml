@@ -7,26 +7,24 @@ services:
     restart: always
     ports: 
       - 5432:5432
-    env_file:
-      - .env
     environment:
       - POSTGRES_USER=victor93
       - POSTGRES_PASSWORD=ignite
       - POSTGRES_DB=dev
-    volumes:
-      - .:/usr/app
 
 # Container da aplicação
   app:
     build: .      
     container_name: delivery_app    
     restart: always
+    environment:
+      - DATABASE_URL="postgresql://victor93:ignite@delivery_database:5432/dev"
     ports:
       - 3000:3000
       - 9229:9229
     volumes:    
-      - .:/usr/app    
+      - .:/usr/app
     links:
       - delivery_database
     depends_on:
-      - delivery_database
+      - delivery_database    
