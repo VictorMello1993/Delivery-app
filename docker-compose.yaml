@@ -18,7 +18,7 @@ services:
     container_name: delivery_app    
     restart: always
     environment:
-      - DATABASE_URL="postgresql://victor93:ignite@delivery_database:5432/dev"
+      - DATABASE_URL=postgresql://victor93:ignite@delivery_database:5432/dev
     ports:
       - 3000:3000
       - 9229:9229
