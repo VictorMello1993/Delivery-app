@@ -1,7 +1,7 @@
 import { prisma } from "../../../database/prismaClient";
-import {compare} from 'bcrypt';
 import {sign} from 'jsonwebtoken';
 import 'dotenv/config'
+import { compare } from "bcryptjs";
 
 interface IAuthenticateClient {
   username: string;
