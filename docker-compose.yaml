@@ -8,9 +8,9 @@ services:
     ports: 
       - 5432:5432
     environment:
-      - POSTGRES_USER=victor93
-      - POSTGRES_PASSWORD=ignite
-      - POSTGRES_DB=dev
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
 
 # Container da aplicação
   app:
@@ -18,7 +18,7 @@ services:
     container_name: delivery_app    
     restart: always
     environment:
-      - DATABASE_URL=postgresql://victor93:ignite@delivery_database:5432/dev
+      - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@delivery_database:5432/${POSTGRES_DB}
     ports:
       - 3000:3000
       - 9229:9229
